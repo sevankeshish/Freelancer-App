@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { getOtp } from "../../services/authService";
 import TextField from "../../ui/TextField";
 
-function SendOTPForm() {
+function SendOTPForm({ setStep }) {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const { isPending, error, data, mutateAsync } = useMutation({
@@ -16,7 +16,7 @@ function SendOTPForm() {
     e.preventDefault();
     try {
       const data = await mutateAsync({ phoneNumber });
-      console.log(data.message);
+      setStep(2);
       toast.success(data.message);
     } catch (error) {
       toast.error(error?.response?.data?.message);
