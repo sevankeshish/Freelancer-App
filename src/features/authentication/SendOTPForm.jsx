@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { getOtp } from "../../services/authService";
+import Loading from "../../ui/Loading";
 import TextField from "../../ui/TextField";
 
 function SendOTPForm({ setStep }) {
@@ -35,9 +36,15 @@ function SendOTPForm({ setStep }) {
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-        <button type="submit" className="btn btn--primary w-full">
-          send the authentication code
-        </button>
+        <div>
+          {isPending ? (
+            <Loading />
+          ) : (
+            <button type="submit" className="btn btn--primary w-full">
+              send the authentication code
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
