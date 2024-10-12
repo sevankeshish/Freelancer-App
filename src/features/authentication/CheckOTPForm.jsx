@@ -8,9 +8,9 @@ import { checkOtp } from "../../services/authService";
 import { HiArrowLeft } from "react-icons/hi";
 import { useEffect } from "react";
 
-function CheckOTPForm({ phoneNumber, onBack }) {
+function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
   const [otp, setOtp] = useState("");
-  const [time, setTime] = useState(5);
+  const [time, setTime] = useState(90);
 
   const { isPending, error, data, mutateAsync } = useMutation({
     mutationFn: checkOtp,
@@ -47,11 +47,11 @@ function CheckOTPForm({ phoneNumber, onBack }) {
       <button onClick={onBack}>
         <HiArrowLeft className="w-6 h-6 text-secondary-500" />
       </button>
-      <div className="mb-4">
+      <div className="mb-4 text-secondary-500">
         {time > 0 ? (
           <p>{time} seconds left to resend the authentication code.</p>
         ) : (
-          <button>Resend Code</button>
+          <button onClick={onResendOtp}>Resend Code</button>
         )}
       </div>
       <form className="space-y-10" onSubmit={checkOtpHandler}>
