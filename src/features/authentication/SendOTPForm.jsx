@@ -6,9 +6,7 @@ import { getOtp } from "../../services/authService";
 import Loading from "../../ui/Loading";
 import TextField from "../../ui/TextField";
 
-function SendOTPForm({ setStep }) {
-  const [phoneNumber, setPhoneNumber] = useState("");
-
+function SendOTPForm({ setStep, phoneNumber, onChange }) {
   const { isPending, error, data, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
@@ -34,7 +32,7 @@ function SendOTPForm({ setStep }) {
           label="phone number"
           name="phoneNumber"
           value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
+          onChange={onChange}
         />
         <div>
           {isPending ? (

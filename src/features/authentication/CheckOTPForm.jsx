@@ -1,12 +1,60 @@
+import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import OTPInput from "react-otp-input";
+import { useNavigate } from "react-router-dom";
+import { checkOtp } from "../../services/authService";
+import { HiArrowLeft } from "react-icons/hi";
+import { useEffect } from "react";
 
-function CheckOTPForm() {
+function CheckOTPForm({ phoneNumber, onBack }) {
   const [otp, setOtp] = useState("");
+  const [time, setTime] = useState(5);
+
+  const { isPending, error, data, mutateAsync } = useMutation({
+    mutationFn: checkOtp,
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = time > 0 && setInterval(() => setTime((t) => t - 1), 1000);
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [time]);
+
+  const checkOtpHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { user, message } = await mutateAsync({ phoneNumber, otp });
+      console.log(data);
+      toast.success(message);
+      if (user.isActive) {
+        //push to apnnel based on role
+        //if(user.role === "OWNER") navigate("/owner");
+        //if(user.role === "FREELANCER") navigate("/freelancer")
+      } else {
+        navigate("/complete-profile");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
   return (
     <div>
-      <form className="space-y-10">
+      <button onClick={onBack}>
+        <HiArrowLeft className="w-6 h-6 text-secondary-500" />
+      </button>
+      <div className="mb-4">
+        {time > 0 ? (
+          <p>{time} seconds left to resend the authentication code.</p>
+        ) : (
+          <button>Resend Code</button>
+        )}
+      </div>
+      <form className="space-y-10" onSubmit={checkOtpHandler}>
         <p className="font-bold text-secondary-600">insert the code</p>
         <OTPInput
           value={otp}
