@@ -8,12 +8,13 @@ import { checkOtp } from "../../services/authService";
 import { HiArrowLeft } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 import { useEffect } from "react";
+import Loading from "../../ui/Loading";
 
 function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(90);
 
-  const { isPending, error, data, mutateAsync } = useMutation({
+  const { isPending, mutateAsync } = useMutation({
     mutationFn: checkOtp,
   });
 
@@ -79,7 +80,16 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
             borderRadius: "0.5rem",
           }}
         />
-        <button className="btn btn--primary w-full">confirm</button>
+
+        <div>
+          {isPending ? (
+            <Loading />
+          ) : (
+            <button type="submit" className="btn btn--primary w-full">
+              confirm
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
