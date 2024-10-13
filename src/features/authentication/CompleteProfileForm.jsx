@@ -1,9 +1,13 @@
 import { useState } from "react";
+import RadioInput from "../../ui/RadioInput";
 import TextField from "../../ui/TextField";
 
 function CompleteProfileForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  console.log(role);
+
   return (
     <div className="flex justify-center pt-10">
       <div className="w-full sm:max-w-sm">
@@ -21,26 +25,22 @@ function CompleteProfileForm() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className="flex item-center justify-center gap-x-8">
-            <div className="flex item-center gap-x-2 text-secondary-600">
-              <input
-                className="cursor-ppinter w-4 h-4 form-radio text-primary-900 focus:ring-primary-900"
-                type="radio"
-                name="role"
-                id="OWNER"
-                value="OWNER"
-              />
-              <label htmlFor="OWNER">Employer</label>
-            </div>
-            <div className="flex item-center gap-x-2 text-secondary-600">
-              <input
-                className="cursor-ppinter w-4 h-4 form-radio text-primary-900 focus:ring-primary-900"
-                type="radio"
-                name="role"
-                id="FREELANCER"
-                value="FREELANCER"
-              />
-              <label htmlFor="FREELANCER">Freelancer</label>
-            </div>
+            <RadioInput
+              name="role"
+              id="OWNER"
+              value="OWNER"
+              label="Employer"
+              onChange={(e) => setRole(e.target.value)}
+              checked={role === "OWNER"}
+            />
+            <RadioInput
+              name="role"
+              id="FREELANCER"
+              value="FREELANCER"
+              label="Freelancer"
+              onChange={(e) => setRole(e.target.value)}
+              checked={role === "FREELANCER"}
+            />
           </div>
 
           <button className="btn btn--primary w-full">confirm</button>
