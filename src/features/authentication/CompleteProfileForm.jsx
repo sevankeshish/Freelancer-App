@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 import { completeProfile } from "../../services/authService";
 import Loading from "../../ui/Loading";
 import RadioInput from "../../ui/RadioInput";
@@ -17,11 +18,16 @@ function CompleteProfileForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email);
     try {
       const { user, message } = await mutateAsync({ name, email, role });
-      console.log(user, message);
       toast.success(message);
+      if (user.status !== 2) {
+        Navigate("/");
+        toast.error("Your profile is being reviewed for confirmation.", {
+          icon: "👏",
+        });
+        return;
+      }
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
