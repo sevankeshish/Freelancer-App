@@ -1,13 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
-import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import OTPInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
-import { checkOtp } from "../../services/authService";
-import { HiArrowLeft } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
-import { useEffect } from "react";
+import { HiArrowLeft } from "react-icons/hi";
+
+import { useMutation } from "@tanstack/react-query";
+
+import { checkOtp } from "../../services/authService";
+
 import Loading from "../../ui/Loading";
 
 function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {

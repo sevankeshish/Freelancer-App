@@ -1,11 +1,14 @@
-import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Navigate } from "react-router-dom";
+
+import { useMutation } from "@tanstack/react-query";
+
 import { completeProfile } from "../../services/authService";
-import Loading from "../../ui/Loading";
+
 import RadioInput from "../../ui/RadioInput";
 import TextField from "../../ui/TextField";
+import Loading from "../../ui/Loading";
 
 function CompleteProfileForm() {
   const [name, setName] = useState("");

@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Auth from "./pages/Auth";
 import { Toaster } from "react-hot-toast";
-import CompleteProfile from "./pages/CompleteProfile";
-import NotFound from "./pages/NotFound";
+
+import Auth from "./pages/Auth";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import CompleteProfile from "./pages/CompleteProfile";
 
 const queryClient = new QueryClient();
 

@@ -1,7 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import toast from "react-hot-toast";
+
+import { useMutation } from "@tanstack/react-query";
+
 import { getOtp } from "../../services/authService";
+
 import CheckOTPForm from "./CheckOTPForm";
 import SendOTPForm from "./SendOTPForm";
 
