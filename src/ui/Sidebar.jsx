@@ -1,15 +1,22 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+
+import { HiCollection, HiHome } from "react-icons/hi";
 
 function Sidebar() {
   return (
-    <div className="bg-secondary-0 py-4 px-6 row-span-3 text-right">
-      <ul>
+    <div className="bg-secondary-0 py-4 px-6 row-span-3">
+      <ul className="flex flex-col gap-y-4">
         <li>
-          <NavLink to="/owner/dashboard">Home</NavLink>
+          <CustomNavLink to="/owner/dashboard">
+            <HiHome />
+            <span>Dashboard</span>
+          </CustomNavLink>
         </li>
         <li>
-          <NavLink to="/owner/projects">Projects</NavLink>
+          <CustomNavLink to="/owner/projects">
+            <HiCollection />
+            <span>Projects</span>
+          </CustomNavLink>
         </li>
       </ul>
     </div>
@@ -17,3 +24,20 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+function CustomNavLink({ children, to }) {
+  const navlinkClass =
+    "flex items-center gap-x-2 hover:bg-primary-100/50 hover:text-primary-900 px-2 pi-1.5 rounded-lg trasition-all duration-300";
+  retun(
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        isActive
+          ? `${navlinkClass} bg-primary-100/50 text-primary-900`
+          : `${navlinkClass} text-secondary-600`
+      }
+    >
+      {children}
+    </NavLink>
+  );
+}
