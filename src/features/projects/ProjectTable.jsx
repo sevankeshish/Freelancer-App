@@ -1,5 +1,7 @@
 import Empty from "../../ui/Empty";
 import Loading from "../../ui/Empty";
+import toLocalDateShort from "../../utils/toLocalDateShort";
+import truncateText from "../../utils/truncateText";
 import useOwnerProjects from "./useOwnerProjects";
 
 function ProjectTable() {
@@ -31,10 +33,12 @@ function ProjectTable() {
           {projects.map((project, index) => (
             <tr key={project._id}>
               <td className=" text-left ">{index + 1}</td>
-              <td className=" text-left ">{project.title}</td>
+              <td className=" text-left ">{truncateText(project.title, 30)}</td>
               <td className=" text-left ">{project.category.title}</td>
               <td className=" text-left ">{project.budget}</td>
-              <td className=" text-left ">{project.deadline}</td>
+              <td className=" text-left ">
+                {toLocalDateShort(project.deadline)}
+              </td>
               <td>
                 <div className="flex flex-wrap justify-start items-center gap-2 max-w-[200px]">
                   {project.tags.map((tag) => (
