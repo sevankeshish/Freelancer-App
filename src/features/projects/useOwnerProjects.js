@@ -7,6 +7,8 @@ export default function useOwnerProjects() {
     queryFn: getOwnerProjectApi,
   });
 
+  // console.log(data, "API");
+
   const { projects } = data || {};
 
   return { isLoading, projects };
