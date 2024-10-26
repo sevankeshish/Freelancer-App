@@ -15,15 +15,15 @@ function ProjectTable() {
   return (
     <Table>
       <Table.Header>
-        <th className=" text-left ">#</th>
-        <th className=" text-left ">Project Title</th>
-        <th className=" text-left ">Category</th>
-        <th className=" text-left ">Budget</th>
-        <th className=" text-left ">Deadline</th>
-        <th className=" text-left ">Tags</th>
-        <th className=" text-left ">Freelancer</th>
-        <th className=" text-left ">Condition</th>
-        <th className=" text-left ">Function</th>
+        <th className="text-left">#</th>
+        <th className="text-left">Project Title</th>
+        <th className="text-left">Category</th>
+        <th className="text-left">Budget</th>
+        <th className="text-left">Deadline</th>
+        <th className="text-left">Tags</th>
+        <th className="text-left">Freelancer</th>
+        <th className="text-left">Condition</th>
+        <th className="text-left">Function</th>
       </Table.Header>
       <Table.Body>
         {projects.map((project, index) => (
