@@ -5,9 +5,11 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
 import Modal from "../../ui/Modal";
 import { useState } from "react";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 function ProjectRow({ project, index }) {
-  const [isEditOpen, setIsEditOpen] = useState("false");
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   return (
     <Table.Row>
       <td className="text-left">{index + 1}</td>
@@ -34,19 +36,35 @@ function ProjectRow({ project, index }) {
       </td>
       <td>
         <div className="flex items-center gap-x-4">
-          <button onClick={() => setIsEditOpen(true)}>
-            <TbPencilMinus className="w-5 h-5 text-primary-900" />
-          </button>
-          <Modal
-            title="modal title"
-            open={isEditOpen}
-            onClose={() => setIsEditOpen(false)}
-          >
-            this is modal ...
-          </Modal>
-          <button>
-            <HiOutlineTrash className="w-5 h-5 text-error" />
-          </button>
+          <>
+            <button onClick={() => setIsEditOpen(true)}>
+              <TbPencilMinus className="w-5 h-5 text-primary-900" />
+            </button>
+            <Modal
+              title={`edit ${project.title}`}
+              open={isEditOpen}
+              onClose={() => setIsEditOpen(false)}
+            >
+              this is modal ...
+            </Modal>
+          </>
+          <>
+            <button onClick={() => setIsDeleteOpen(true)}>
+              <HiOutlineTrash className="w-5 h-5 text-error" />
+            </button>
+            <Modal
+              title={`delete ${project.title}`}
+              open={isDeleteOpen}
+              onClose={() => setIsDeleteOpen(false)}
+            >
+              <ConfirmDelete
+                resourceName={project.title}
+                onClose={() => setIsDeleteOpen(false)}
+                disabled={false}
+                onConfirm={() => {}}
+              />
+            </Modal>
+          </>
         </div>
       </td>
     </Table.Row>
