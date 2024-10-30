@@ -1,16 +1,21 @@
-function TextField({ label, name, value, onChange }) {
+function TextField({
+  label,
+  name,
+  register,
+  validationSchema,
+  type = "text",
+  required,
+}) {
   return (
     <div>
       <label className="mb-2 block" htmlFor={name}>
-        {label}
+        {label} {required && <span className="text-error">*</span>}
       </label>
       <input
-        value={value}
-        onChange={onChange}
+        {...register(name, validationSchema)}
         id={name}
-        name={name}
         className="textField__input"
-        type="text"
+        type={type}
         autoComplete="off"
       />
     </div>
