@@ -15,8 +15,6 @@ function CreateProjectForm() {
   };
 
   return (
-    //add discription field and budget
-
     <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
       <TextField
         label="project title"
@@ -35,7 +33,6 @@ function CreateProjectForm() {
       <TextField
         label="description"
         name="description"
-        type="number"
         register={register}
         required
         validationSchema={{
@@ -50,6 +47,7 @@ function CreateProjectForm() {
       <TextField
         label="budget"
         name="budget"
+        type="number"
         register={register}
         required
         validationSchema={{
