@@ -52,7 +52,7 @@ function CreateProjectForm() {
         register={register}
         required
         validationSchema={{
-          requierd: "Budget is required.",
+          required: "Budget is required.",
         }}
         errors={errors}
       />

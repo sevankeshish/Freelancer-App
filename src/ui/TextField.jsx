@@ -2,7 +2,7 @@ function TextField({
   label,
   name,
   register,
-  validationSchema,
+  validationSchema = {},
   type = "text",
   required,
   errors,
@@ -13,7 +13,7 @@ function TextField({
         {label} {required && <span className="text-error">*</span>}
       </label>
       <input
-        {...register(name, validationSchema)}
+        {...(register && register(name, validationSchema))}
         id={name}
         className="textField__input"
         type={type}
