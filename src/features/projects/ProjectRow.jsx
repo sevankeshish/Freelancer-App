@@ -1,12 +1,15 @@
-import Table from "../../ui/Table";
-import toLocalDateShort from "../../utils/toLocalDateShort";
-import truncateText from "../../utils/truncateText";
+import { useState } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
-import Modal from "../../ui/Modal";
-import { useState } from "react";
-import ConfirmDelete from "../../ui/ConfirmDelete";
+
 import useRemoveProject from "./useRemoveProject";
+
+import truncateText from "../../utils/truncateText";
+import toLocalDateShort from "../../utils/toLocalDateShort";
+
+import Table from "../../ui/Table";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 function ProjectRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);

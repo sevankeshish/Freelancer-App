@@ -1,4 +1,5 @@
 import { HiArrowLeft } from "react-icons/hi";
+
 import useMoveBack from "../hooks/useMoveback";
 
 function NotFound() {

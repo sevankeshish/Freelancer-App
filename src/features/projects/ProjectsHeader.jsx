@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
+
 import Modal from "../../ui/Modal";
+
 import CreateProjectForm from "./CreateProjectForm";
 
 function ProjectsHeader() {

@@ -2,14 +2,15 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 
+import AppLayout from "./ui/AppLayout";
+
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import CompleteProfile from "./pages/CompleteProfile";
-import AppLayout from "./ui/AppLayout";
-import OwnerDashboard from "./pages/OwnerDashboard";
-import Projects from "./pages/Projects";
 import Project from "./pages/Project";
+import NotFound from "./pages/NotFound";
+import Projects from "./pages/Projects";
+import OwnerDashboard from "./pages/OwnerDashboard";
+import CompleteProfile from "./pages/CompleteProfile";
 
 const queryClient = new QueryClient();
 

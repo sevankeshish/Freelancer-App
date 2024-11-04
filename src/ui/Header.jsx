@@ -1,4 +1,3 @@
-import React from "react";
 import useUser from "../features/authentication/useUser";
 
 function Header() {

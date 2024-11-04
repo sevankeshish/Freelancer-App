@@ -1,4 +1,5 @@
 import { HiOutlineX } from "react-icons/hi";
+
 import useOutsideClick from "../hooks/useOutsideClick";
 
 function Modal({ open, onClose, title, children }) {
