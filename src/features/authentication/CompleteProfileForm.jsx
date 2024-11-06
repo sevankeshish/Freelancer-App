@@ -9,20 +9,22 @@ import { completeProfile } from "../../services/authService";
 import RadioInput from "../../ui/RadioInput";
 import TextField from "../../ui/TextField";
 import Loading from "../../ui/Loading";
+import { useForm } from "react-hook-form";
+import RadioInputGroups from "../../ui/RadioInputGroups";
 
 function CompleteProfileForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const { handleSubmit, register } = useForm();
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [role, setRole] = useState("");
 
-  const { mutateAsync, isPending } = useMutation({
+  const { mutateAsync, isPending, watch } = useMutation({
     mutationFn: completeProfile,
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     try {
-      const { user, message } = await mutateAsync({ name, email, role });
+      const { user, message } = await mutateAsync(data);
       toast.success(message);
       if (user.status !== 2) {
         Navigate("/");
@@ -39,37 +41,45 @@ function CompleteProfileForm() {
   return (
     <div className="flex justify-center pt-10">
       <div className="w-full sm:max-w-sm">
-        <form className="space-y-8" onSubmit={handleSubmit}>
+        <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
           <TextField
             label="first and last name"
             name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            register={register}
+            validationSchema={{
+              required: "the name and last name   is reuired.",
+            }}
+            errors={errors}
           />
           <TextField
             label="email"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            register={register}
+            validationSchema={{
+              required: "the e-maile is reuired.",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "the email is invalid",
+              },
+            }}
+            errors={errors}
           />
-          <div className="flex item-center justify-center gap-x-8">
-            <RadioInput
-              name="role"
-              id="OWNER"
-              value="OWNER"
-              label="Employer"
-              onChange={(e) => setRole(e.target.value)}
-              checked={role === "OWNER"}
-            />
-            <RadioInput
-              name="role"
-              id="FREELANCER"
-              value="FREELANCER"
-              label="Freelancer"
-              onChange={(e) => setRole(e.target.value)}
-              checked={role === "FREELANCER"}
-            />
-          </div>
+          <RadioInputGroups
+            errors={errors}
+            register={register}
+            watch={watch}
+            configs={{
+              name: "role",
+              validationSchema: { required: "the role is required" },
+              options: [
+                {
+                  value: "OWNER",
+                  label: "OWNER",
+                },
+                { value: "FREELANCER", label: "FREELANCER" },
+              ],
+            }}
+          />
           <div>
             {isPending ? (
               <Loading />

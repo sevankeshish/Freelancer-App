@@ -8,7 +8,7 @@ import { getOtp } from "../../services/authService";
 import Loading from "../../ui/Loading";
 import TextField from "../../ui/TextField";
 
-function SendOTPForm({ onSubmit, isSendingOtp, phoneNumber, onChange }) {
+function SendOTPForm({ onSubmit, isSendingOtp, register }) {
   //useQuery ==> get
   //useMutation => post, put, delete, ...
 
@@ -18,8 +18,7 @@ function SendOTPForm({ onSubmit, isSendingOtp, phoneNumber, onChange }) {
         <TextField
           label="phone number"
           name="phoneNumber"
-          value={phoneNumber}
-          onChange={onChange}
+          register={register}
         />
         <div>
           {isSendingOtp ? (

@@ -1,4 +1,15 @@
-function RadioInput({ name, id, value, checked, onChange, label }) {
+import { validateSchema } from "graphql";
+
+function RadioInput({
+  name,
+  id,
+  value,
+  register,
+  label,
+  validateSchema,
+  errors,
+  watch,
+}) {
   return (
     <div className="flex items-center gap-x-2 text-secondary-600">
       <input
@@ -7,8 +18,8 @@ function RadioInput({ name, id, value, checked, onChange, label }) {
         name={name}
         id={id}
         value={value}
-        onChange={onChange}
-        checked={checked}
+        {...register(name, validateSchema)}
+        checked={watch(name) === value}
       />
       <label htmlFor={id}>{label}</label>
     </div>
