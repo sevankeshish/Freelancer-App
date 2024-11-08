@@ -1,6 +1,7 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
 import { Navigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -9,16 +10,20 @@ import { completeProfile } from "../../services/authService";
 import RadioInput from "../../ui/RadioInput";
 import TextField from "../../ui/TextField";
 import Loading from "../../ui/Loading";
-import { useForm } from "react-hook-form";
 import RadioInputGroups from "../../ui/RadioInputGroups";
 
 function CompleteProfileForm() {
-  const { handleSubmit, register } = useForm();
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm();
   // const [name, setName] = useState("");
   // const [email, setEmail] = useState("");
   // const [role, setRole] = useState("");
 
-  const { mutateAsync, isPending, watch } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: completeProfile,
   });
 
