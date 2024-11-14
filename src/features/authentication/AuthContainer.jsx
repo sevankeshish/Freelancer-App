@@ -1,5 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -7,7 +8,6 @@ import { getOtp } from "../../services/authService";
 
 import CheckOTPForm from "./CheckOTPForm";
 import SendOTPForm from "./SendOTPForm";
-import { useForm } from "react-hook-form";
 
 function AuthContainer() {
   const [step, setStep] = useState(1);
