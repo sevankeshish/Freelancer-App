@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import RHFSelect from "../../ui/RHFSelect";
 
 import TextField from "../../ui/TextField";
 
@@ -55,6 +56,13 @@ function CreateProjectForm() {
           required: "Budget is required.",
         }}
         errors={errors}
+      />
+      <RHFSelect
+        label="category"
+        required
+        name="category"
+        register={register}
+        options={[]}
       />
       <button type="submit" className="btn btn--primary w-full">
         Confirm
