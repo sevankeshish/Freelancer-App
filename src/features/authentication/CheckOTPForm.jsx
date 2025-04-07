@@ -11,23 +11,18 @@ import { checkOtp } from "../../services/authService";
 
 import Loading from "../../ui/Loading";
 
+const RESEND_TIME = 90;
+
 function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
-  const [otp, setOtp] = useState("");
-  const [time, setTime] = useState(90);
+  const [otp,  setOtp] = useState("");
+  const [time, setTime] = useState(RESEND_TIME);
+
+  const navigate = useNavigate();
 
   const { isPending, mutateAsync } = useMutation({
     mutationFn: checkOtp,
   });
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = time > 0 && setInterval(() => setTime((t) => t - 1), 1000);
-    return () => {
-      if (timer) clearInterval(timer);
-    };
-  }, [time]);
-
+ 
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     try {
@@ -48,6 +43,14 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
       toast.error(error?.response?.data?.message);
     }
   };
+
+  useEffect(() => {
+    const timer = time > 0 && setInterval(() => setTime((t) => t - 1), 1000);
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [time]);
+
   return (
     <div>
       <button onClick={onBack}>
@@ -66,6 +69,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
           <p>{time} seconds left to resend the authentication code.</p>
         ) : (
           <button onClick={onResendOtp}>Resend Code</button>
+          // <button onClick={console.log("asd")}>Resend Code</button>
         )}
       </div>
       <form className="space-y-10" onSubmit={checkOtpHandler}>

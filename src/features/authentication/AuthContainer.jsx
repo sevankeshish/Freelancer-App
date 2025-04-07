@@ -24,13 +24,14 @@ function AuthContainer() {
   });
 
   const sendOtpHandler = async (data) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const { message } = await mutateAsync(data);
       setStep(2);
       toast.success(message);
     } catch (error) {
       toast.error(error?.response?.data?.message);
+      // console.log("first")
     }
   };
 
@@ -39,8 +40,8 @@ function AuthContainer() {
       case 1:
         return (
           <SendOTPForm
-            onSubmit={handleSubmit(sendOtpHandler)}
             isSendingOtp={isSendingOtp}
+            onSubmit={handleSubmit(sendOtpHandler)}
             setStep={setStep}
             register={register}
           />

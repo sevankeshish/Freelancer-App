@@ -1,5 +1,3 @@
-import { validateSchema } from "graphql";
-
 function RadioInput({
   name,
   id,
