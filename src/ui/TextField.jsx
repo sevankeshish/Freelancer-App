@@ -1,4 +1,4 @@
-function TextField({
+ function TextField({
   label,
   name,
   register,

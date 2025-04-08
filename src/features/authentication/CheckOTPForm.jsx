@@ -11,7 +11,7 @@ import { checkOtp } from "../../services/authService";
 
 import Loading from "../../ui/Loading";
 
-const RESEND_TIME = 90;
+const RESEND_TIME = 2;
 
 function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
   const [otp,  setOtp] = useState("");
@@ -68,8 +68,8 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
         {time > 0 ? (
           <p>{time} seconds left to resend the authentication code.</p>
         ) : (
-          <button onClick={onResendOtp}>Resend Code</button>
-          // <button onClick={console.log("asd")}>Resend Code</button>
+          <button onClick={() => onResendOtp()}>Resend Code</button>
+          // <button onClick={() => console.log("asd")}>Resend Code</button>
         )}
       </div>
       <form className="space-y-10" onSubmit={checkOtpHandler}>

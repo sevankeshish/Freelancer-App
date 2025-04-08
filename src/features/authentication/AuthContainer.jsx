@@ -26,7 +26,8 @@ function AuthContainer() {
   const sendOtpHandler = async (data) => {
     // e.preventDefault();
     try {
-      const { message } = await mutateAsync(data);
+      const { message } = await mutateAsync({phoneNumber:getValues("phoneNumber")});
+      // const { message } = await mutateAsync(data);
       setStep(2);
       toast.success(message);
     } catch (error) {
