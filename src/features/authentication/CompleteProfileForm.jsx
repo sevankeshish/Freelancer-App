@@ -33,11 +33,11 @@ function CompleteProfileForm() {
       toast.success(message);
       if (user.status !== 2) {
         Navigate("/");
-        toast.error("Your profile is being reviewed for confirmation.", {
-          icon: "👏",
-        });
+        toast("Your profile is being reviewed for confirmation.", {icon: "👏"});
         return;
       }
+      if (user.role === "OWNER") return Navigate("/owner");
+      if ( user.role === "FREELANCER") return Navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -52,7 +52,7 @@ function CompleteProfileForm() {
             name="name"
             register={register}
             validationSchema={{
-              required: "the name and last name   is reuired.",
+              required: "the name and last name is reuired.",
             }}
             errors={errors}
           />

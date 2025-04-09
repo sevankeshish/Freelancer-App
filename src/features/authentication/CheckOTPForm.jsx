@@ -11,7 +11,7 @@ import { checkOtp } from "../../services/authService";
 
 import Loading from "../../ui/Loading";
 
-const RESEND_TIME = 2;
+const RESEND_TIME = 90;
 
 function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
   const [otp,  setOtp] = useState("");
@@ -29,9 +29,9 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp, otpResponse }) {
       const { user, message } = await mutateAsync({ phoneNumber, otp });
       toast.success(message);
       if (!user.isActive) return navigate("/complete-profile");
-      if (user.status !== 2) {
+      if (Number(user.status) !== 2) {
         navigate("/");
-        toast.error("Your profile is being reviewed for confirmation.", {
+        toast("Your profile is being reviewed for confirmation.", {
           icon: "👏",
         });
         return;
