@@ -4,7 +4,8 @@ const BASE_URL = "http://localhost:5000/api";
 
 const app = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
+  withCredentials: true, //har coockie i ke http- only coockie bashe, dakhele coockie haye moroorgar zakhire shode bashe,be soorate automatic ahr coocki ke dakhele mroorgar bashe be samte backend ferestade mishe, va az samte backened hadle mishe
+  //true => http-only coockies will be saved in the browser and automatically will send to backend => and backend hadels it
 });
 
 app.interceptors.request.use(
