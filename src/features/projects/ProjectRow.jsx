@@ -10,6 +10,7 @@ import toLocalDateShort from "../../utils/toLocalDateShort";
 import Table from "../../ui/Table";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import toNumbersWithComma from "../../utils/toNumbersWithComma";
 
 function ProjectRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -20,7 +21,7 @@ function ProjectRow({ project, index }) {
       <td className="text-left">{index + 1}</td>
       <td className="text-left">{truncateText(project.title, 30)}</td>
       <td className="text-left">{project.category.title}</td>
-      <td className="text-left">{project.budget}</td>
+      <td className="text-left">{toNumbersWithComma(project.budget)}</td>
       <td className="text-left">{toLocalDateShort(project.deadline)}</td>
       <td>
         <div className="flex flex-wrap justify-start items-center gap-2 max-w-[200px]">
