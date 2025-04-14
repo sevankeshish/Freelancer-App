@@ -1,6 +1,7 @@
 import http from "./httpService";
 
-export function getOwnerProjectApi() {
+//this is only owner's created projects
+export function getOwnerProjectsApi() {
   return http.get("/project/owner-projects").then(({ data }) => data.data);
 }
 
