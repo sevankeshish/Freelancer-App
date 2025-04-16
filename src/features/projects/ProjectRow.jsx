@@ -13,9 +13,12 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import toNumbersWithComma from "../../utils/toNumbersWithComma";
 
 function ProjectRow({ project, index }) {
+
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  
   const { removeProject } = useRemoveProject();
+
   return (
     <Table.Row>
       <td className="text-left">{index + 1}</td>
@@ -50,7 +53,7 @@ function ProjectRow({ project, index }) {
               title={`edit ${project.title}`}
               open={isEditOpen}
               onClose={() => setIsEditOpen(false)}
-            >
+            >   
               this is modal ...
             </Modal>
           </>
