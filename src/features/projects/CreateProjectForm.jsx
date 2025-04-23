@@ -5,6 +5,7 @@ import { TagsInput } from "react-tag-input-component";
 import RHFSelect from "../../ui/RHFSelect";
 
 import TextField from "../../ui/TextField";
+import DatePickerField from "../../ui/DatePickerField";
 
 function CreateProjectForm() {
   //useForm ==> managing states , submit form , validation
@@ -16,6 +17,7 @@ function CreateProjectForm() {
   } = useForm();
 
   const [tags, setTags] = useState([]);
+  const [date, setDate] = useState(new Date())
 
   const onSubmit = (data) => {
     console.log(data);
@@ -73,6 +75,7 @@ function CreateProjectForm() {
         <label className="mb-2 block text-secondary-700">Tag</label>
         <TagsInput value={tags} onChange={setTags} name={tags} />
       </div>
+      <DatePickerField date={date} setDate={setDate} label="Deadline"/>
       <button type="submit" className="btn btn--primary w-full">
         Confirm
       </button>
