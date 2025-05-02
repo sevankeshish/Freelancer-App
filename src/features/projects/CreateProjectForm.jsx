@@ -6,6 +6,7 @@ import RHFSelect from "../../ui/RHFSelect";
 
 import TextField from "../../ui/TextField";
 import DatePickerField from "../../ui/DatePickerField";
+import useCategories from "../../hooks/useCategories";
 
 function CreateProjectForm() {
   //useForm ==> managing states , submit form , validation
@@ -19,9 +20,14 @@ function CreateProjectForm() {
   const [tags, setTags] = useState([]);
   const [date, setDate] = useState(new Date())
 
+  const {categories} = useCategories()
+
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  console.log(categories,"categories")
+
 
   return (
     <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +75,7 @@ function CreateProjectForm() {
         required
         name="category"
         register={register}
-        options={[]}
+        options={categories}
       />
       <div>
         <label className="mb-2 block text-secondary-700">Tag</label>
