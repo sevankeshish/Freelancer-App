@@ -1,4 +1,4 @@
- function TextField({
+function TextField({
   label,
   name,
   register,
@@ -9,7 +9,7 @@
 }) {
   return (
     <div>
-      <label className="mb-2 block text-secondary-700" htmlFor={name}>
+      <label className="mb-2 text-secondary-700 flex" htmlFor={name}>
         {label} {required && <span className="text-error">*</span>}
       </label>
       <input

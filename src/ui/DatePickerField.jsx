@@ -3,7 +3,7 @@ import DatePicker from "react-multi-date-picker";
 function DatePickerField({ label, date, setDate }) {
   return (
     <div>
-      <span className="mb-2 block text-secondary-700">{label}</span>
+      <span className="mb-2 flex text-secondary-700">{label}</span>
       <DatePicker
         containerClassName="w-full"
         inputClass="textField__input"

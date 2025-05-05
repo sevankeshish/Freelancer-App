@@ -11,12 +11,12 @@ import Table from "../../ui/Table";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import toNumbersWithComma from "../../utils/toNumbersWithComma";
+import CreateProjectForm from "./CreateProjectForm";
 
 function ProjectRow({ project, index }) {
-
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  
+
   const { removeProject } = useRemoveProject();
 
   return (
@@ -44,7 +44,7 @@ function ProjectRow({ project, index }) {
         )}
       </td>
       <td>
-        <div className="flex items-center gap-x-4">
+        <div className="flex items-center  gap-x-4">
           <>
             <button onClick={() => setIsEditOpen(true)}>
               <TbPencilMinus className="w-5 h-5 text-primary-900" />
@@ -53,8 +53,12 @@ function ProjectRow({ project, index }) {
               title={`edit ${project.title}`}
               open={isEditOpen}
               onClose={() => setIsEditOpen(false)}
-            >   
-              this is modal ...
+            >
+              <CreateProjectForm
+                className="flex"
+                projectToEdit={project}
+                onClose={() => setIsEditOpen(false)}
+              />
             </Modal>
           </>
           <>

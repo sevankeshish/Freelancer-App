@@ -10,21 +10,43 @@ import useCategories from "../../hooks/useCategories";
 import useCreateProject from "./useCreateProject";
 import Loading from "../../ui/Loading";
 
-function CreateProjectForm(onClose) {
+function CreateProjectForm({ onClose, projectToEdit = {} }) {
   //useForm ==> managing states , submit form , validation
+  const { _id: editId } = projectToEdit;
+  const isEditSession = Boolean(editId);
+
+  const {
+    title,
+    desription,
+    budget,
+    category,
+    deadline,
+    tags: prevTags,
+  } = projectToEdit;
+
+  let editValues = {};
+
+  if (isEditSession) {
+    editValues = {
+      title,
+      desription,
+      budget,
+      category: category._id,
+    };
+  }
 
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm();
+  } = useForm({ defaultValues: editValues });
 
-  const [tags, setTags] = useState([]);
-  const [date, setDate] = useState(new Date());
+  const [tags, setTags] = useState(prevTags || []);
+  const [date, setDate] = useState(new Date(deadline || ""));
 
-  const {categories} = useCategories();
-  const {isCreating , createProject} = useCreateProject();
+  const { categories } = useCategories();
+  const { isCreating, createProject } = useCreateProject();
 
   const onSubmit = (data) => {
     const newProject = {
@@ -36,10 +58,9 @@ function CreateProjectForm(onClose) {
       onSuccess: () => {
         onClose();
         reset();
-      }
-    })
+      },
+    });
   };
-
 
   return (
     <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
@@ -90,17 +111,17 @@ function CreateProjectForm(onClose) {
         options={categories}
       />
       <div>
-        <label className="mb-2 block text-secondary-700">Tag</label>
+        <label className="mb-2 flex text-secondary-700">Tag</label>
         <TagsInput value={tags} onChange={setTags} name={tags} />
       </div>
-      <DatePickerField date={date} setDate={setDate} label="Deadline"/>
+      <DatePickerField date={date} setDate={setDate} label="Deadline" />
       <div className="!mt-8">
         {isCreating ? (
-          <Loading/>
+          <Loading />
         ) : (
           <button type="submit" className="btn btn--primary w-full">
-          Confirm
-        </button>
+            Confirm
+          </button>
         )}
       </div>
     </form>
