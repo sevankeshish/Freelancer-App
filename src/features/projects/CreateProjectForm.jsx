@@ -7,26 +7,38 @@ import RHFSelect from "../../ui/RHFSelect";
 import TextField from "../../ui/TextField";
 import DatePickerField from "../../ui/DatePickerField";
 import useCategories from "../../hooks/useCategories";
+import useCreateProject from "./useCreateProject";
+import Loading from "../../ui/Loading";
 
-function CreateProjectForm() {
+function CreateProjectForm(onClose) {
   //useForm ==> managing states , submit form , validation
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const [tags, setTags] = useState([]);
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
-  const {categories} = useCategories()
+  const {categories} = useCategories();
+  const {isCreating , createProject} = useCreateProject();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const newProject = {
+      ...data,
+      deadline: new Date(date).toISOString(),
+      tags,
+    };
+    createProject(newProject, {
+      onSuccess: () => {
+        onClose();
+        reset();
+      }
+    })
   };
-
-  console.log(categories,"categories")
 
 
   return (
@@ -82,9 +94,15 @@ function CreateProjectForm() {
         <TagsInput value={tags} onChange={setTags} name={tags} />
       </div>
       <DatePickerField date={date} setDate={setDate} label="Deadline"/>
-      <button type="submit" className="btn btn--primary w-full">
-        Confirm
-      </button>
+      <div className="!mt-8">
+        {isCreating ? (
+          <Loading/>
+        ) : (
+          <button type="submit" className="btn btn--primary w-full">
+          Confirm
+        </button>
+        )}
+      </div>
     </form>
   );
 }

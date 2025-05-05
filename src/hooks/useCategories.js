@@ -18,7 +18,6 @@ export default function useCategories(){
         label: item.title,
         value: item.englishTitle,
     }));
-    console.log(rawCategories,"rawCategories")
 
     return {isLoading, categories, transformedCategories};
 
