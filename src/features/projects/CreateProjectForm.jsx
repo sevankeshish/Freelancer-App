@@ -9,6 +9,7 @@ import DatePickerField from "../../ui/DatePickerField";
 import useCategories from "../../hooks/useCategories";
 import useCreateProject from "./useCreateProject";
 import Loading from "../../ui/Loading";
+import useEditProject from "./useEditProject";
 
 function CreateProjectForm({ onClose, projectToEdit = {} }) {
   //useForm ==> managing states , submit form , validation
@@ -17,7 +18,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
 
   const {
     title,
-    desription,
+    description,
     budget,
     category,
     deadline,
@@ -29,7 +30,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
   if (isEditSession) {
     editValues = {
       title,
-      desription,
+      description,
       budget,
       category: category._id,
     };
@@ -47,6 +48,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
 
   const { categories } = useCategories();
   const { isCreating, createProject } = useCreateProject();
+  const { isEditing, editProject } = useEditProject();
 
   const onSubmit = (data) => {
     const newProject = {
@@ -54,12 +56,25 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
       deadline: new Date(date).toISOString(),
       tags,
     };
-    createProject(newProject, {
-      onSuccess: () => {
-        onClose();
-        reset();
-      },
-    });
+
+    if (isEditSession) {
+      editProject(
+        { id: editId, newProject },
+        {
+          onSuccess: () => {
+            onClose();
+            reset();
+          },
+        }
+      );
+    } else {
+      createProject(newProject, {
+        onSuccess: () => {
+          onClose();
+          reset();
+        },
+      });
+    }
   };
 
   return (
@@ -112,7 +127,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
       />
       <div>
         <label className="mb-2 flex text-secondary-700">Tag</label>
-        <TagsInput value={tags} onChange={setTags} name={tags} />
+        <TagsInput value={tags} onChange={setTags} name="tags" />
       </div>
       <DatePickerField date={date} setDate={setDate} label="Deadline" />
       <div className="!mt-8">
