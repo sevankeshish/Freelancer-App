@@ -131,7 +131,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
       </div>
       <DatePickerField date={date} setDate={setDate} label="Deadline" />
       <div className="!mt-8">
-        {isCreating ? (
+        {isCreating || isEditing ? (
           <Loading />
         ) : (
           <button type="submit" className="btn btn--primary w-full">

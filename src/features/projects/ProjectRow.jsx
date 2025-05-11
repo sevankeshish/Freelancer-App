@@ -55,7 +55,6 @@ function ProjectRow({ project, index }) {
               onClose={() => setIsEditOpen(false)}
             >
               <CreateProjectForm
-                className="flex"
                 projectToEdit={project}
                 onClose={() => setIsEditOpen(false)}
               />
