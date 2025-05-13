@@ -16,3 +16,8 @@ export function createProjectApi(data) {
 export function editProjectApi({id , newProject}) {
   return http.patch(`/project/update/${id}` , newProject).then (({data}) => data.data );
 }
+
+export function toggleProjectStatusApi({id , data}) {
+  //{status:"OPEN"}
+  return http.patch(`/project/${id}`, data).then((data) => data.data)
+}

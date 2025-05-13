@@ -12,6 +12,7 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import toNumbersWithComma from "../../utils/toNumbersWithComma";
 import CreateProjectForm from "./CreateProjectForm";
+import ToggleProjectStatus from "./ToggleProjectStatus";
 
 function ProjectRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -37,11 +38,7 @@ function ProjectRow({ project, index }) {
       </td>
       <td className="text-left">{project.freelancer?.name || "-"}</td>
       <td>
-        {project.status === "OPEN" ? (
-          <span className="badge badge--success flex justify-start ">open</span>
-        ) : (
-          <span className="badge badge--danger flex justify-start ">close</span>
-        )}
+        <ToggleProjectStatus project={project} />
       </td>
       <td>
         <div className="flex items-center  gap-x-4">
