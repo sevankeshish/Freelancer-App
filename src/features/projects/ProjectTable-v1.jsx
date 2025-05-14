@@ -17,22 +17,21 @@ function ProjectTable() {
 
   return (
     <div className="bg-secondary-0 overflow-x-auto">
-
-    <table>
-       <thead>
+      <table>
+        <thead>
           <tr className="title-row">
-          <th className="text-left">#</th>
-        <th className="text-left">Project Title</th>
-        <th className="text-left">Category</th>
-        <th className="text-left">Budget</th>
-        <th className="text-left">Deadline</th>
-        <th className="text-left">Tags</th>
-        <th className="text-left">Freelancer</th>
-        <th className="text-left">Condition</th>
-        <th className="text-left">Function</th>
+            <th className="text-left">#</th>
+            <th className="text-left">Project Title</th>
+            <th className="text-left">Category</th>
+            <th className="text-left">Budget</th>
+            <th className="text-left">Deadline</th>
+            <th className="text-left">Tags</th>
+            <th className="text-left">Freelancer</th>
+            <th className="text-left">Condition</th>
+            <th className="text-left">Function</th>
           </tr>
         </thead>
-      <tbody>
+        <tbody>
           {projects.map((project, index) => (
             <tr key={project._id}>
               <td>{index + 1}</td>
@@ -52,16 +51,16 @@ function ProjectTable() {
               <td>{project.freelancer?.name || "-"}</td>
               <td>
                 {project.status === "OPEN" ? (
-                  <span className="badge badge--success">باز</span>
+                  <span className="badge badge--success">open</span>
                 ) : (
-                  <span className="badge badge--danger">بسته</span>
+                  <span className="badge badge--danger">close</span>
                 )}
               </td>
               <td>...</td>
             </tr>
           ))}
         </tbody>
-    </table>
+      </table>
     </div>
   );
 }

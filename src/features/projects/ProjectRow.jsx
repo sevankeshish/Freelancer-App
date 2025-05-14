@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { HiOutlineTrash } from "react-icons/hi";
+import { Link } from "react-router-dom";
+import { HiEye, HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
 
 import useRemoveProject from "./useRemoveProject";
@@ -79,6 +80,11 @@ function ProjectRow({ project, index }) {
             </Modal>
           </>
         </div>
+      </td>
+      <td>
+        <Link to={project._id} className="flex justify-center">
+          <HiEye className="w-5 h-5 text-primary-800" />
+        </Link>
       </td>
     </Table.Row>
   );
