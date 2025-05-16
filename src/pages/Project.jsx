@@ -1,6 +1,6 @@
 import ProjectHeader from "../features/project/ProjectHeader";
+import ProposalsTable from "../features/project/ProposalsTable";
 import useProject from "../features/project/useProject";
-import ProjectTable from "../features/projects/ProjectTable";
 import Loading from "../ui/Loading";
 
 function Project() {
@@ -11,7 +11,7 @@ function Project() {
   return (
     <div>
       <ProjectHeader project={project} />
-      <ProjectTable proposals={project.proposals} />
+      <ProposalsTable proposals={project.proposals} />
     </div>
   );
 }

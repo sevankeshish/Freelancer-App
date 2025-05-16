@@ -8,7 +8,7 @@ const {id} = useParams();
 
   const { isLoading, data } = useQuery({
     queryKey: ["project", id],
-    queryFn: getProjectApi(id),
+    queryFn:() => getProjectApi(id),
     retry: false,
   });
 
