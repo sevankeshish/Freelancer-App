@@ -28,7 +28,7 @@ function ProjectTable() {
             <th className="text-left">Tags</th>
             <th className="text-left">Freelancer</th>
             <th className="text-left">Condition</th>
-            <th className="text-left">Function</th>
+            <th className="text-left">Operation</th>
           </tr>
         </thead>
         <tbody>
