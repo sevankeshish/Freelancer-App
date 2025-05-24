@@ -3,7 +3,7 @@ import Table from "../../ui/Table";
 import ProposalRow from "./ProposalRow";
 
 function ProposalsTable({ proposals }) {
-  // if (!proposals.length) return <Empty resourceName="proposals" />;
+  if (!proposals.length) return <Empty resourceName="proposals" />;
 
   return (
     <Table>
@@ -13,7 +13,6 @@ function ProposalsTable({ proposals }) {
         <th className="text-left">Description</th>
         <th className="text-left">Deadline</th>
         <th className="text-left">Budget</th>
-        <th className="text-left">Category</th>
         <th className="text-left">Condition</th>
         <th className="text-left">Operation</th>
       </Table.Header>
