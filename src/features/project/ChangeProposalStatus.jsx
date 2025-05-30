@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
 import RHFSelect from "../../ui/RHFSelect";
+import useChangeProposalStaus from "./useChangeProposalStatus";
+import { useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import Loading from "../../ui/Loading";
 
 const options = [
   {
@@ -17,10 +21,21 @@ const options = [
 ];
 
 function ChangeProposalStatus({ proposalId, onClose }) {
+  const { id: projectId } = useParams();
   const { register, handleSubmit } = useForm();
+  const { changeProposalStatus, isUpdating } = useChangeProposalStaus();
+  const queryClient = useQueryClient();
 
   const onSubmit = (data) => {
-    console.log(data);
+    changeProposalStatus(
+      { id: proposalId, data },
+      {
+        onSuccess: () => {
+          onClose();
+          queryClient.invalidateQueries({ queryKey: ["project", projectId] });
+        },
+      }
+    );
   };
 
   return (
@@ -34,9 +49,13 @@ function ChangeProposalStatus({ proposalId, onClose }) {
           options={options}
         />
         <div className="!mt-8">
-          <button className="btn btn--primary w-full" type="submit">
-            Confirm
-          </button>
+          {isUpdating ? (
+            <Loading />
+          ) : (
+            <button className="btn btn--primary w-full" type="submit">
+              Confirm
+            </button>
+          )}
         </div>
       </form>
     </div>
